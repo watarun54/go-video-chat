@@ -52,3 +52,7 @@ func (handler *SqlHandler) Delete(value interface{}) *gorm.DB {
 func (handler *SqlHandler) Where(query interface{}, args ...interface{}) *gorm.DB {
 	return handler.Conn.Where(query, args...)
 }
+
+func (handler *SqlHandler) Debug() *gorm.DB {
+	return handler.Conn.Debug()
+}

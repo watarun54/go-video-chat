@@ -4,6 +4,7 @@ import "github.com/watarun54/go-video-chat/api/domain"
 
 type UserRepository interface {
 	FindById(id int) (domain.User, error)
+	FindByEmail(email string) (domain.User, error)
 	FindAll() (domain.Users, error)
 	Store(domain.User) (domain.User, error)
 	Update(domain.User) (domain.User, error)
