@@ -31,6 +31,8 @@ func Init() {
 	api.GET("/comments", func(c echo.Context) error { return commentController.Index(c) })
 	api.GET("/comments/:id", func(c echo.Context) error { return commentController.Show(c) })
 	api.POST("/comments", func(c echo.Context) error { return commentController.Create(c) })
+	api.PUT("/comments/:id", func(c echo.Context) error { return commentController.Update(c) })
+	api.DELETE("/comments/:id", func(c echo.Context) error { return commentController.Delete(c) })
 
 	// Start server
 	e.Logger.Fatal(e.Start(":8000"))

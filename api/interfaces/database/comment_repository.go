@@ -29,3 +29,18 @@ func (repo *CommentRepository) Store(c domain.Comment) (comment domain.Comment, 
 	comment = c
 	return
 }
+
+func (repo *CommentRepository) Update(c domain.Comment) (comment domain.Comment, err error) {
+	if err = repo.Debug().Take(&domain.Comment{ID: c.ID}, "user_id = ?", c.UserID).Save(&c).Error; err != nil {
+		return
+	}
+	comment = c
+	return
+}
+
+func (repo *CommentRepository) DeleteById(c domain.Comment) (err error) {
+	if err = repo.Debug().Take(&domain.Comment{ID: c.ID}, "user_id = ?", c.UserID).Delete(&c).Error; err != nil {
+		return
+	}
+	return
+}

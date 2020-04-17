@@ -66,3 +66,36 @@ func (controller *CommentController) Create(c Context) (err error) {
 	c.JSON(200, comment)
 	return
 }
+
+func (controller *CommentController) Update(c Context) (err error) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	uid := userIDFromToken(c)
+	com := domain.Comment{
+		ID: id,
+		UserID: uid,
+	}
+	c.Bind(&com)
+	comment, err := controller.Interactor.Update(com)
+	if err != nil {
+		c.JSON(500, NewError(err))
+		return
+	}
+	c.JSON(200, comment)
+	return
+}
+
+func (controller *CommentController) Delete(c Context) (err error) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	uid := userIDFromToken(c)
+	com := domain.Comment{
+		ID: id,
+		UserID: uid,
+	}
+	err = controller.Interactor.DeleteById(com)
+	if err != nil {
+		c.JSON(500, NewError(err))
+		return
+	}
+	c.JSON(200, com)
+	return
+}

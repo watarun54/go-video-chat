@@ -20,3 +20,13 @@ func (interactor *CommentInteractor) Add(c domain.Comment) (comment domain.Comme
 	comment, err = interactor.CommentRepository.Store(c)
 	return
 }
+
+func (interactor *CommentInteractor) Update(c domain.Comment) (comment domain.Comment, err error) {
+	comment, err = interactor.CommentRepository.Update(c)
+	return
+}
+
+func (interactor *CommentInteractor) DeleteById(c domain.Comment) (err error) {
+	err = interactor.CommentRepository.DeleteById(c)
+	return
+}
