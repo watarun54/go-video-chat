@@ -71,7 +71,7 @@ func (controller *CommentController) Update(c Context) (err error) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	uid := userIDFromToken(c)
 	com := domain.Comment{
-		ID: id,
+		ID:     id,
 		UserID: uid,
 	}
 	c.Bind(&com)
@@ -88,7 +88,7 @@ func (controller *CommentController) Delete(c Context) (err error) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	uid := userIDFromToken(c)
 	com := domain.Comment{
-		ID: id,
+		ID:     id,
 		UserID: uid,
 	}
 	err = controller.Interactor.DeleteById(com)
