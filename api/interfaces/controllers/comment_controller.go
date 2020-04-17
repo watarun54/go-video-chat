@@ -25,7 +25,7 @@ func NewCommentController(sqlHandler database.SqlHandler) *CommentController {
 func (controller *CommentController) Show(c Context) (err error) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	uid := userIDFromToken(c)
-	com := &domain.Comment{
+	com := domain.Comment{
 		ID:     id,
 		UserID: uid,
 	}
@@ -40,7 +40,7 @@ func (controller *CommentController) Show(c Context) (err error) {
 
 func (controller *CommentController) Index(c Context) (err error) {
 	uid := userIDFromToken(c)
-	com := &domain.Comment{
+	com := domain.Comment{
 		UserID: uid,
 	}
 	comments, err := controller.Interactor.Comments(com)
@@ -49,5 +49,20 @@ func (controller *CommentController) Index(c Context) (err error) {
 		return
 	}
 	c.JSON(200, comments)
+	return
+}
+
+func (controller *CommentController) Create(c Context) (err error) {
+	uid := userIDFromToken(c)
+	com := domain.Comment{
+		UserID: uid,
+	}
+	c.Bind(&com)
+	comment, err := controller.Interactor.Add(com)
+	if err != nil {
+		c.JSON(500, NewError(err))
+		return
+	}
+	c.JSON(200, comment)
 	return
 }

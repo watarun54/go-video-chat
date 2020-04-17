@@ -30,6 +30,7 @@ func Init() {
 	api.Use(middleware.JWTWithConfig(controllers.NewJWTConfig()))
 	api.GET("/comments", func(c echo.Context) error { return commentController.Index(c) })
 	api.GET("/comments/:id", func(c echo.Context) error { return commentController.Show(c) })
+	api.POST("/comments", func(c echo.Context) error { return commentController.Create(c) })
 
 	// Start server
 	e.Logger.Fatal(e.Start(":8000"))
