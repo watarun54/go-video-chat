@@ -32,5 +32,5 @@ func Init() {
 	api.GET("/comments/:id", func(c echo.Context) error { return commentController.Show(c) })
 
 	// Start server
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(":8000"))
 }
