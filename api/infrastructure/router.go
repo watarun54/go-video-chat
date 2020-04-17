@@ -11,6 +11,7 @@ func Init() {
 	e := echo.New()
 
 	userController := controllers.NewUserController(NewSqlHandler())
+	commentController := controllers.NewCommentController(NewSqlHandler())
 
 	// Middleware
 	e.Use(middleware.Logger())
@@ -21,6 +22,9 @@ func Init() {
 	e.POST("/users", func(c echo.Context) error { return userController.Create(c) })
 	e.PUT("/users/:id", func(c echo.Context) error { return userController.Save(c) })
 	e.DELETE("/users/:id", func(c echo.Context) error { return userController.Delete(c) })
+
+	e.GET("/comments", func(c echo.Context) error { return commentController.Index(c) })
+	e.GET("/comments/:id", func(c echo.Context) error { return commentController.Show(c) })
 
 	// Start server
 	e.Logger.Fatal(e.Start(":1323"))
