@@ -6,12 +6,12 @@ type CommentInteractor struct {
 	CommentRepository CommentRepository
 }
 
-func (interactor *CommentInteractor) CommentById(id int) (comment domain.Comment, err error) {
-	comment, err = interactor.CommentRepository.FindById(id)
+func (interactor *CommentInteractor) Comment(c *domain.Comment) (comment domain.Comment, err error) {
+	comment, err = interactor.CommentRepository.FindOne(c)
 	return
 }
 
-func (interactor *CommentInteractor) Comments() (comments domain.Comments, err error) {
-	comments, err = interactor.CommentRepository.FindAll()
+func (interactor *CommentInteractor) Comments(c *domain.Comment) (comments domain.Comments, err error) {
+	comments, err = interactor.CommentRepository.FindAll(c)
 	return
 }

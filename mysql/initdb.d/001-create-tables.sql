@@ -38,4 +38,5 @@ set @now = NOW();
 
 insert into comments(text, user_id, created_at, updated_at) values("comment1", 1, @now, @now);
 insert into comments(text, user_id, created_at, updated_at) values("comment2", 1, @now, @now);
-insert into comments(text, user_id, created_at, updated_at) values("comment3", 1, @now, @now);
+insert into comments(text, user_id, created_at, updated_at) values("comment3", 2, @now, @now);
+insert into comments(text, user_id, created_at, updated_at) values("comment4", 2, @now, @now);
