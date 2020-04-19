@@ -20,15 +20,15 @@ func Init() {
 	e.Use(middleware.Recover())
 
 	e.POST("/login", func(c echo.Context) error { return authController.Login(c) })
-
-	e.GET("/users", func(c echo.Context) error { return userController.Index(c) })
-	e.GET("/users/:id", func(c echo.Context) error { return userController.Show(c) })
-	e.POST("/users", func(c echo.Context) error { return userController.Create(c) })
-	e.PUT("/users/:id", func(c echo.Context) error { return userController.Save(c) })
-	e.DELETE("/users/:id", func(c echo.Context) error { return userController.Delete(c) })
+	e.POST("/signup", func(c echo.Context) error { return userController.Create(c) })
 
 	api := e.Group("/api")
 	api.Use(middleware.JWTWithConfig(controllers.NewJWTConfig()))
+	api.GET("/users", func(c echo.Context) error { return userController.Index(c) })
+	api.GET("/users/:id", func(c echo.Context) error { return userController.Show(c) })
+	api.PUT("/users/:id", func(c echo.Context) error { return userController.Save(c) })
+	api.DELETE("/users/:id", func(c echo.Context) error { return userController.Delete(c) })
+
 	api.GET("/comments", func(c echo.Context) error { return commentController.Index(c) })
 	api.GET("/comments/:id", func(c echo.Context) error { return commentController.Show(c) })
 	api.POST("/comments", func(c echo.Context) error { return commentController.Create(c) })

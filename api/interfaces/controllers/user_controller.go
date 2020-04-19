@@ -44,8 +44,10 @@ func (controller *UserController) Index(c Context) (err error) {
 }
 
 func (controller *UserController) Create(c Context) (err error) {
-	u := domain.User{}
-	c.Bind(&u)
+	uForm := domain.UserForm{}
+	c.Bind(&uForm)
+	uForm.HashedPassword = generateHash(uForm.Email, uForm.Password)
+	u := domain.ConvertUserFormToUser(uForm)
 	user, err := controller.Interactor.Add(u)
 	if err != nil {
 		c.JSON(500, NewError(err))

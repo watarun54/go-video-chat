@@ -23,7 +23,7 @@ func (repo *UserRepository) FindByEmail(email string) (user domain.User, err err
 }
 
 func (repo *UserRepository) FindAll() (users domain.Users, err error) {
-	if err = repo.Find(&users).Error; err != nil {
+	if err = repo.Debug().Find(&users).Error; err != nil {
 		return
 	}
 	return
