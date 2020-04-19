@@ -11,6 +11,11 @@ func (interactor *UserInteractor) UserById(id int) (user domain.User, err error)
 	return
 }
 
+func (interactor *UserInteractor) UserByEmail(email string) (user domain.User, err error) {
+	user, err = interactor.UserRepository.FindByEmail(email)
+	return
+}
+
 func (interactor *UserInteractor) Users() (users domain.Users, err error) {
 	users, err = interactor.UserRepository.FindAll()
 	return

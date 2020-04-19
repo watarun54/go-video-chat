@@ -33,6 +33,10 @@ func (handler *SqlHandler) First(out interface{}, where ...interface{}) *gorm.DB
 	return handler.Conn.First(out, where...)
 }
 
+func (handler *SqlHandler) Take(out interface{}, where ...interface{}) *gorm.DB {
+	return handler.Conn.Take(out, where...)
+}
+
 func (handler *SqlHandler) Raw(sql string, values ...interface{}) *gorm.DB {
 	return handler.Conn.Raw(sql, values...)
 }
@@ -51,4 +55,8 @@ func (handler *SqlHandler) Delete(value interface{}) *gorm.DB {
 
 func (handler *SqlHandler) Where(query interface{}, args ...interface{}) *gorm.DB {
 	return handler.Conn.Where(query, args...)
+}
+
+func (handler *SqlHandler) Debug() *gorm.DB {
+	return handler.Conn.Debug()
 }
