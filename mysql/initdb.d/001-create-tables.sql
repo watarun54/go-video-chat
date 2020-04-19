@@ -13,10 +13,10 @@ create table IF not exists `users` (
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 insert into users(name, email, hashed_password) values("admin", "admin@test.com", "ca104e39a10ee19d78dcd1523b628c3028ba11343f355f81d4bea00065829161"); -- "password"
-insert into users(name, email, hashed_password) values("test1", "test1@test.com", "0216c89866cd37f4356f39853add6e4abe120e997ac2613885647a024f700628"); -- "password"
-insert into users(name, email, hashed_password) values("test2", "test2@test.com", "4f8f72d1f674af4804339a51499b09e3f377fb6c81ff0170b2c76737f03bef19"); -- "password"
-insert into users(name, email, hashed_password) values("test3", "test3@test.com", "0a7cff99941bebb860307bc3785cd624a4e7033a883b2c7575ff76909c6f5972"); -- "password"
-insert into users(name, email, hashed_password) values("test4", "test4@test.com", "16c634a74bc93c234fb3acf8f108de29beee1c12023cf56133237d85217fb21b"); -- "password"
+insert into users(name, email, hashed_password) values("test1", "test1@test.com", "a2c08eb261b5b9a3d59f016b910ccce10b85c4f7cb4a6dda9d4ffee3e14f3fe5"); -- "password"
+insert into users(name, email, hashed_password) values("test2", "test2@test.com", "4925dda39aeac6606431b07042a2ca5f1b93924fe473a145972976b1a4ffe6f0"); -- "password"
+insert into users(name, email, hashed_password) values("test3", "test3@test.com", "1d6cc6ca5412dd04c4a4dd09c52469ba99e4f27101407289b9ef68d2f0cc0a98"); -- "password"
+insert into users(name, email, hashed_password) values("test4", "test4@test.com", "2be31d457ea77e14c14b0e29c1d1debbe4dfda41d999102ae58171d315c50a93"); -- "password"
 
 
 ---- drop ----
