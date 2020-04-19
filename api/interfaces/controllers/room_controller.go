@@ -45,3 +45,15 @@ func (controller *RoomController) Index(c Context) (err error) {
 	c.JSON(200, rooms)
 	return
 }
+
+func (controller *RoomController) Create(c Context) (err error) {
+	r := domain.Room{}
+	c.Bind(&r)
+	room, err := controller.Interactor.Add(r)
+	if err != nil {
+		c.JSON(500, NewError(err))
+		return
+	}
+	c.JSON(200, room)
+	return
+}

@@ -21,3 +21,11 @@ func (repo *RoomRepository) FindAll() (rooms domain.Rooms, err error) {
 	}
 	return
 }
+
+func (repo *RoomRepository) Store(r domain.Room) (room domain.Room, err error) {
+	if err = repo.Debug().Create(&r).Error; err != nil {
+		return
+	}
+	room = r
+	return
+}
