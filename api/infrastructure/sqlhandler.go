@@ -57,6 +57,10 @@ func (handler *SqlHandler) Where(query interface{}, args ...interface{}) *gorm.D
 	return handler.Conn.Where(query, args...)
 }
 
+func (handler *SqlHandler) Preload(column string, conditions ...interface{}) *gorm.DB {
+	return handler.Conn.Preload(column, conditions)
+}
+
 func (handler *SqlHandler) Debug() *gorm.DB {
 	return handler.Conn.Debug()
 }

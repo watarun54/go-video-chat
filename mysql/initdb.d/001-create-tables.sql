@@ -52,8 +52,9 @@ create table IF not exists `user_rooms` (
 
 insert into user_rooms(user_id, room_id, created_at, updated_at) values(1, 1, @now, @now);
 insert into user_rooms(user_id, room_id, created_at, updated_at) values(2, 1, @now, @now);
-insert into user_rooms(user_id, room_id, created_at, updated_at) values(3, 2, @now, @now);
+insert into user_rooms(user_id, room_id, created_at, updated_at) values(3, 1, @now, @now);
 insert into user_rooms(user_id, room_id, created_at, updated_at) values(4, 2, @now, @now);
+insert into user_rooms(user_id, room_id, created_at, updated_at) values(5, 2, @now, @now);
 
 
 ---- drop ----

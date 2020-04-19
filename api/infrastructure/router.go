@@ -12,6 +12,7 @@ func Init() {
 
 	authController := controllers.NewAuthController(NewSqlHandler())
 	userController := controllers.NewUserController(NewSqlHandler())
+	roomController := controllers.NewRoomController(NewSqlHandler())
 	commentController := controllers.NewCommentController(NewSqlHandler())
 
 	// Middleware
@@ -33,6 +34,9 @@ func Init() {
 	api.POST("/comments", func(c echo.Context) error { return commentController.Create(c) })
 	api.PUT("/comments/:id", func(c echo.Context) error { return commentController.Update(c) })
 	api.DELETE("/comments/:id", func(c echo.Context) error { return commentController.Delete(c) })
+
+	api.GET("/rooms", func(c echo.Context) error { return roomController.Index(c) })
+	api.GET("/rooms/:id", func(c echo.Context) error { return roomController.Show(c) })
 
 	// Start server
 	e.Logger.Fatal(e.Start(":8000"))
