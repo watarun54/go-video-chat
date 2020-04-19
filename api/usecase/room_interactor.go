@@ -2,14 +2,16 @@ package usecase
 
 import "github.com/watarun54/go-video-chat/api/domain"
 
-type IRoomRepository interface {
-	FindOne(r domain.Room) (domain.Room, error)
-	FindAll() (domain.Rooms, error)
-}
+type (
+	IRoomRepository interface {
+		FindOne(r domain.Room) (domain.Room, error)
+		FindAll() (domain.Rooms, error)
+	}
 
-type RoomInteractor struct {
-	RoomRepository IRoomRepository
-}
+	RoomInteractor struct {
+		RoomRepository IRoomRepository
+	}
+)
 
 func (interactor *RoomInteractor) Room(r domain.Room) (room domain.Room, err error) {
 	room, err = interactor.RoomRepository.FindOne(r)

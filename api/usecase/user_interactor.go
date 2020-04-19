@@ -2,9 +2,20 @@ package usecase
 
 import "github.com/watarun54/go-video-chat/api/domain"
 
-type UserInteractor struct {
-	UserRepository UserRepository
-}
+type (
+	IUserRepository interface {
+		FindById(id int) (domain.User, error)
+		FindByEmail(email string) (domain.User, error)
+		FindAll() (domain.Users, error)
+		Store(domain.User) (domain.User, error)
+		Update(domain.User) (domain.User, error)
+		DeleteById(domain.User) error
+	}
+
+	UserInteractor struct {
+		UserRepository IUserRepository
+	}
+)
 
 func (interactor *UserInteractor) UserById(id int) (user domain.User, err error) {
 	user, err = interactor.UserRepository.FindById(id)
