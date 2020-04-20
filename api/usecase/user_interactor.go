@@ -18,6 +18,14 @@ type (
 	}
 )
 
+func (interactor *UserInteractor) ConvertUserFormToUser(userForm domain.UserForm) (user domain.User) {
+	user.ID = userForm.ID
+	user.Name = userForm.Name
+	user.Email = userForm.Email
+	user.HashedPassword = userForm.HashedPassword
+	return
+}
+
 func (interactor *UserInteractor) UserById(id int) (user domain.User, err error) {
 	user, err = interactor.UserRepository.FindById(id)
 	return

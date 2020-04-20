@@ -47,7 +47,7 @@ func (controller *UserController) Create(c Context) (err error) {
 	uForm := domain.UserForm{}
 	c.Bind(&uForm)
 	uForm.HashedPassword = generateHash(uForm.Email, uForm.Password)
-	u := domain.ConvertUserFormToUser(uForm)
+	u := controller.Interactor.ConvertUserFormToUser(uForm)
 	user, err := controller.Interactor.Add(u)
 	if err != nil {
 		c.JSON(500, NewError(err))

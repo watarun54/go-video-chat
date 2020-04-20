@@ -15,11 +15,3 @@ type (
 		Password string `json:"password"`
 	}
 )
-
-func ConvertUserFormToUser(userForm UserForm) (user User) {
-	user.ID = userForm.ID
-	user.Name = userForm.Name
-	user.Email = userForm.Email
-	user.HashedPassword = userForm.HashedPassword
-	return
-}
