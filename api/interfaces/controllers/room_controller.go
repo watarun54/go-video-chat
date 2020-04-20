@@ -79,3 +79,18 @@ func (controller *RoomController) Update(c Context) (err error) {
 	c.JSON(200, room)
 	return
 }
+
+func (controller *RoomController) Delete(c Context) (err error) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	room := domain.Room{
+		ID: id,
+	}
+	c.Bind(&room)
+	err = controller.Interactor.DeleteById(room)
+	if err != nil {
+		c.JSON(500, NewError(err))
+		return
+	}
+	c.JSON(200, room)
+	return
+}

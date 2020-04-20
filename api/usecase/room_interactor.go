@@ -10,6 +10,7 @@ type (
 		FindAll() (domain.Rooms, error)
 		Store(r domain.Room) (domain.Room, error)
 		Update(r domain.Room) (domain.Room, error)
+		DeleteById(r domain.Room) error
 	}
 
 	RoomInteractor struct {
@@ -46,5 +47,10 @@ func (interactor *RoomInteractor) Add(r domain.Room) (room domain.Room, err erro
 
 func (interactor *RoomInteractor) Update(r domain.Room) (room domain.Room, err error) {
 	room, err = interactor.RoomRepository.Update(r)
+	return
+}
+
+func (interactor *RoomInteractor) DeleteById(r domain.Room) (err error) {
+	err = interactor.RoomRepository.DeleteById(r)
 	return
 }

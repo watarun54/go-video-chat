@@ -40,3 +40,13 @@ func (repo *RoomRepository) Update(r domain.Room) (room domain.Room, err error) 
 	room = r
 	return
 }
+
+func (repo *RoomRepository) DeleteById(r domain.Room) (err error) {
+	if err = repo.Debug().Model(&r).Association("Users").Replace(&[]domain.User{}).Error; err != nil {
+		return
+	}
+	if err = repo.Debug().Delete(&r).Error; err != nil {
+		return
+	}
+	return
+}
