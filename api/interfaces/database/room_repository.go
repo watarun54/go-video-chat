@@ -29,3 +29,14 @@ func (repo *RoomRepository) Store(r domain.Room) (room domain.Room, err error) {
 	room = r
 	return
 }
+
+func (repo *RoomRepository) Update(r domain.Room) (room domain.Room, err error) {
+	if err = repo.Debug().Set("gorm:save_associations", false).Take(&domain.Room{ID: r.ID}).Updates(&r).Error; err != nil {
+		return
+	}
+	if err = repo.Debug().Model(&r).Association("Users").Replace(r.Users).Error; err != nil {
+		return
+	}
+	room = r
+	return
+}

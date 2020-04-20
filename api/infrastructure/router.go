@@ -38,6 +38,7 @@ func Init() {
 	api.GET("/rooms", func(c echo.Context) error { return roomController.Index(c) })
 	api.GET("/rooms/:id", func(c echo.Context) error { return roomController.Show(c) })
 	api.POST("/rooms", func(c echo.Context) error { return roomController.Create(c) })
+	api.PUT("/rooms/:id", func(c echo.Context) error { return roomController.Update(c) })
 
 	// Start server
 	e.Logger.Fatal(e.Start(":8000"))
