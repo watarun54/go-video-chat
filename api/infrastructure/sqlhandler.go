@@ -9,6 +9,7 @@ import (
 
 type SqlHandler struct {
 	Conn *gorm.DB
+	Asso *gorm.Association
 }
 
 func NewSqlHandler() database.SqlHandler {
@@ -55,6 +56,22 @@ func (handler *SqlHandler) Delete(value interface{}) *gorm.DB {
 
 func (handler *SqlHandler) Where(query interface{}, args ...interface{}) *gorm.DB {
 	return handler.Conn.Where(query, args...)
+}
+
+func (handler *SqlHandler) Preload(column string, conditions ...interface{}) *gorm.DB {
+	return handler.Conn.Preload(column, conditions)
+}
+
+func (handler *SqlHandler) Set(name string, value interface{}) *gorm.DB {
+	return handler.Conn.Set(name, value)
+}
+
+func (handler *SqlHandler) Association(column string) *gorm.Association {
+	return handler.Conn.Association(column)
+}
+
+func (handler *SqlHandler) Replace(values ...interface{}) *gorm.Association {
+	return handler.Asso.Replace(values)
 }
 
 func (handler *SqlHandler) Debug() *gorm.DB {

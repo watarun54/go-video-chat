@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"errors"
 	"time"
 
@@ -42,10 +44,10 @@ func NewAuthController(sqlHandler database.SqlHandler) *AuthController {
 }
 
 func (controller *AuthController) Login(c Context) (err error) {
-	u := domain.User{}
-	c.Bind(&u)
-	user, _ := controller.Interactor.UserByEmail(u.Email)
-	if user.ID == 0 || user.Password != u.Password {
+	uForm := domain.UserForm{}
+	c.Bind(&uForm)
+	user, _ := controller.Interactor.UserByEmail(uForm.Email)
+	if user.ID == 0 || user.HashedPassword != generateHash(uForm.Email, uForm.Password) {
 		c.JSON(500, NewError(errors.New("invalid name or password")))
 		return
 	}
@@ -75,4 +77,10 @@ func userIDFromToken(c Context) int {
 	claims := user.Claims.(*jwtCustomClaims)
 	uid := claims.UID
 	return uid
+}
+
+func generateHash(email string, password string) string {
+	salt := "test" //TODO :change
+	result := sha256.Sum256([]byte(email + ":" + password + ":" + salt))
+	return hex.EncodeToString(result[:])
 }
