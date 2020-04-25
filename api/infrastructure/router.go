@@ -10,6 +10,7 @@ func Init() {
 	// Echo instance
 	e := echo.New()
 
+	websocketController := controllers.NewWebsocketController()
 	authController := controllers.NewAuthController(NewSqlHandler())
 	userController := controllers.NewUserController(NewSqlHandler())
 	roomController := controllers.NewRoomController(NewSqlHandler())
@@ -18,6 +19,10 @@ func Init() {
 	// Middleware
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+
+	e.Static("/", "public")
+	e.GET("/ws", func(c echo.Context) error { return websocketController.HandleConnections(c) })
+	go websocketController.HandleMessages()
 
 	e.POST("/login", func(c echo.Context) error { return authController.Login(c) })
 	e.POST("/signup", func(c echo.Context) error { return userController.Create(c) })
