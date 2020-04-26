@@ -21,7 +21,11 @@ func Init() {
 	e.Use(middleware.Recover())
 
 	e.Static("/", "public")
-	e.GET("/ws", func(c echo.Context) error { return websocketController.HandleConnections(c) })
+
+	e.GET("/room", func(c echo.Context) error { return websocketController.Show(c) }) // e.g. "/room?id=1"
+	e.GET("/ws/:id", func(c echo.Context) error { return websocketController.HandleConnections(c) })
+	go websocketController.HandleMessages()
+	go websocketController.HandleMessages()
 	go websocketController.HandleMessages()
 
 	e.POST("/login", func(c echo.Context) error { return authController.Login(c) })

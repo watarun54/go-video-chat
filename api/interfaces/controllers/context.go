@@ -7,6 +7,7 @@ import (
 
 type Context interface {
 	Param(string) string
+	QueryParam(string) string
 	Bind(interface{}) error
 	JSON(int, interface{}) error
 	Get(string) interface{}
