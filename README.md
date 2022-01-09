@@ -13,12 +13,18 @@
 
 コマンドでapiとmysqlを起動する
 ```bash
-docker-compose up -d
+docker-compose up -d --build
 ```
 
 # ルーティング
 
 ```bash
+// sign up
+curl -i -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"name": "sample", "email": "sample@test.com", password: "password"}' localhost:8000/signup
+
+// sign in
+curl -i -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"email": "sample@test.com", password: "password"}' localhost:8000/login
+
 // 一覧
 curl -i -H 'Content-Type:application/json' localhost:8000/users
 
